@@ -62,13 +62,15 @@ data  <- cbind(Y,X1,X2,ID)
 }
 
 
-#' Add together two numbers.
+#' Conditional Logistic Regression with Robust Variance
 #'
-#' This is a description
+#' Performs conditional logistic regression with a robust variance estimator
 #'
-#' @param formula Similar to a formula for logistic regression.
+#' @param formula Similar to a formula for glm.
 #' @param id.set  The ID variable for matched sets.
-#' @return The coefficeints, standard errors, and the covariance matrix for the estimates.
+#' @param data    The dataset
+#' @return coef   The coefficeints (i.e. betas) and their standard error
+#' @return cov    The covariance matrix of the coefficeints (useful for wald tests)
 #' @export
 #' @examples
 #' n    <-  10

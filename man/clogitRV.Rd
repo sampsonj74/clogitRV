@@ -2,20 +2,24 @@
 % Please edit documentation in R/functionsAndStuff.R
 \name{clogitRV}
 \alias{clogitRV}
-\title{Add together two numbers.}
+\title{Conditional Logistic Regression with Robust Variance}
 \usage{
 clogitRV(formula, id.set, data)
 }
 \arguments{
-\item{formula}{Similar to a formula for logistic regression.}
+\item{formula}{Similar to a formula for glm.}
 
 \item{id.set}{The ID variable for matched sets.}
+
+\item{data}{The dataset}
 }
 \value{
-The coefficeints, standard errors, and the covariance matrix for the estimates.
+coef   The coefficeints (i.e. betas) and their standard error
+
+cov    The covariance matrix of the coefficeints (useful for wald tests)
 }
 \description{
-This is a description
+Performs conditional logistic regression with a robust variance estimator
 }
 \examples{
 n    <-  10
