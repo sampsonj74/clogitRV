@@ -80,6 +80,26 @@ data  <- cbind(Y,X1,X2,ID)
 #' X2   <- rnorm(4*n)
 #' data  <- cbind(Y,X1,X2,ID)
 #' clogitRV(Y~X1+X2,~ID,data)
+#' library(ggplot2)
+#' ###Run the Model (note: z is just a covariate)
+#' simData$x1 <- simData$t   * simData$x
+#' simData$x2 <- simData$t^2 * simData$x
+#' model      <- clogitRV(Y~x+x1+x2+z,~ID, data=simData)
+#' beta       <- model$coef[-4,1]
+#' cov        <- model$cov[-4,-4]
+#'
+#' ##Draw the picture
+#' t2       <- seq(min(simData$t),max(simData$t),length.out=100)
+#' t2M      <- cbind(1,t2,t2^2)
+#' beta2     <- t2M %*% beta
+#' se2       <- sqrt(diag(t2M%*%cov%*%t(t2M)))
+#' plotData  <- as.data.frame(t2,beta2,se2)
+#' ggplot(data=plotData,aes(t2,beta2)) +
+#'   geom_line() +
+#'   geom_point()+
+#'   geom_errorbar(aes(ymin=beta2-1.96*se2, ymax=beta2+1.96*se2))+
+#'   xlab("Time Until Diaganosis")+
+#'   ylab("log(RR)")
 
 clogitRV=function(formula,id.set,data){
 
@@ -134,6 +154,18 @@ clogitRV=function(formula,id.set,data){
   return(list(coef=coef,cov=cov))
 }
 
-
-
+############################################################################################
+#
+#' A Simulated Dataset
+#'
+#' A simulated dataset for showing a time-varying effect
+#'
+#' @format A data frame with 100 matched case/control pairs with two measurements per person
+#' \describe{
+#' \item{Y}{Case/Control Status}
+#' \item{x}{biomarker}
+#' \item{t}{time between biomarker measurement and case diagnosis}
+#' \item{z}{a covariate}
+#' }
+"simData"
 
