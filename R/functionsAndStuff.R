@@ -108,7 +108,13 @@ data  <- cbind(Y,X1,X2,ID)
 #'   geom_errorbar(aes(ymin=beta2-1.96*se2, ymax=beta2+1.96*se2))+
 #'   xlab("Time Until Diaganosis")+
 #'   ylab("log(RR)")
-
+#'
+#' ##Get the p-values
+#' ##P-value for overall effect of the biomarker
+#' 1-pchisq(t(beta)%*%solve(cov)%*%beta,length(beta))
+#' ##P-value for non-linear effect of the biomarker
+#' 1-pchisq(t(beta[-1])%*%solve(cov[-1,-1])%*%beta[-1],length(beta[-1]))
+#'
 clogitRV=function(formula,id.set,data){
 
   require(tidyverse)
