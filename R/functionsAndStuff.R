@@ -73,6 +73,7 @@ data  <- cbind(Y,X1,X2,ID)
 #' @return cov    The covariance matrix of the coefficeints (useful for wald tests)
 #' @export
 #' @examples
+#' ###A simple Example
 #' n    <-  10
 #' Y    <- rep(c(1,0,1,0),n)
 #' ID   <- rep(c(1:n),each=4)
@@ -80,7 +81,13 @@ data  <- cbind(Y,X1,X2,ID)
 #' X2   <- rnorm(4*n)
 #' data  <- cbind(Y,X1,X2,ID)
 #' clogitRV(Y~X1+X2,~ID,data)
-#' library(ggplot2)
+#' ##
+#' ##
+#' ##
+#' ##An example with a time-varying coefficient
+#' ##simData is an example dataset included in the package
+#' ?simData
+#'
 #' ###Run the Model (note: z is just a covariate)
 #' simData$x1 <- simData$t   * simData$x
 #' simData$x2 <- simData$t^2 * simData$x
@@ -89,6 +96,7 @@ data  <- cbind(Y,X1,X2,ID)
 #' cov        <- model$cov[-4,-4]
 #'
 #' ##Draw the picture
+#' library(ggplot2)
 #' t2       <- seq(min(simData$t),max(simData$t),length.out=100)
 #' t2M      <- cbind(1,t2,t2^2)
 #' beta2     <- t2M %*% beta
@@ -160,7 +168,7 @@ clogitRV=function(formula,id.set,data){
 #'
 #' A simulated dataset for showing a time-varying effect
 #'
-#' @format A data frame with 100 matched case/control pairs with two measurements per person
+#' @format A data frame with 100 matched case/control pairs with two measurements per individual
 #' \describe{
 #' \item{Y}{Case/Control Status}
 #' \item{x}{biomarker}

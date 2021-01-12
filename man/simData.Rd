@@ -5,7 +5,7 @@
 \alias{simData}
 \title{A Simulated Dataset}
 \format{
-A data frame with 100 matched case/control pairs with two measurements per person
+A data frame with 100 matched case/control pairs with two measurements per individual
 \describe{
 \item{Y}{Case/Control Status}
 \item{x}{biomarker}

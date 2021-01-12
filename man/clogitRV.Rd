@@ -22,6 +22,7 @@ cov    The covariance matrix of the coefficeints (useful for wald tests)
 Performs conditional logistic regression with a robust variance estimator
 }
 \examples{
+###A simple Example
 n    <-  10
 Y    <- rep(c(1,0,1,0),n)
 ID   <- rep(c(1:n),each=4)
@@ -29,7 +30,13 @@ X1   <- rnorm(4*n)
 X2   <- rnorm(4*n)
 data  <- cbind(Y,X1,X2,ID)
 clogitRV(Y~X1+X2,~ID,data)
-library(ggplot2)
+##
+##
+##
+##An example with a time-varying coefficient
+##simData is an example dataset included in the package
+?simData
+
 ###Run the Model (note: z is just a covariate)
 simData$x1 <- simData$t   * simData$x
 simData$x2 <- simData$t^2 * simData$x
@@ -38,6 +45,7 @@ beta       <- model$coef[-4,1]
 cov        <- model$cov[-4,-4]
 
 ##Draw the picture
+library(ggplot2)
 t2       <- seq(min(simData$t),max(simData$t),length.out=100)
 t2M      <- cbind(1,t2,t2^2)
 beta2     <- t2M \%*\% beta
