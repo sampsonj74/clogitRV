@@ -8,7 +8,7 @@ getI.robust2  <- function(beta,data3,Yname,Xnames,IDname){
   betac2         <- matrix(beta,ncol=1)
   XS             <- c(Xnames,"strata")
   strata         <- unique(data3[,"strata"])
-  ID             <- unlist(strsplit(strata,"\\."))[c(1:length(strata))%%2==1]
+  ID             <- unlist(strsplit(strata,"\\."))[c(1: (2*length(strata))  )%%2==1]
 
   XA             <- data3[data3[,Yname]==1,XS]
   XA             <- as.matrix(XA[match(strata,XA[,"strata"]),Xnames])
